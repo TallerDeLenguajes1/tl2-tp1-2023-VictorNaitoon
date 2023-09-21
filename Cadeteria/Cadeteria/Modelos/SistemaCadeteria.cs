@@ -106,6 +106,21 @@ namespace Cadeteria.Modelos
             pedido.Estado = estado;
         }
 
+        /*Reasignamos un pedido a otro cadete*/
+        public string ReasignarPedido(Pedido pedido, int idCadete)
+        {
+            string info = "";
+            var cadete = ListaCadetes.Find(x => x.IdCadete == idCadete);
+
+            if (cadete == null)
+            {
+                info += "No se encontro ningun cadete correspondiente al id que proporciono\n";
+            }
+
+            cadete.AsignarPedido(pedido);
+            info += "Se reasigno el pedido a otro cliente con exito";
+            return info;
+        }
 
     }
 }

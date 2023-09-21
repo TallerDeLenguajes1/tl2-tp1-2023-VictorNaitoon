@@ -36,6 +36,8 @@ namespace Cadeteria.Modelos
             Nombre = nombre;
             Direccion = direccion;
             Telefono = telefono;
+
+            ListaPedidos = new List<Pedido>();
         }
 
         public Cadete()

@@ -32,15 +32,35 @@ for(int i = 0; i < listaObtenida.Count; i += 3)
 //Generamos un numero random para obtener los datos de cualquiera de las tres cadeterias que tengo en el csv
 var listas = new List<string>();
 listas = datos.LeerCSV(rutaCadeteria);
-Console.WriteLine(listas.Count);
 cadeteriaRandom = rand.Next(0, listas.Count);
 SistemaCadeteria nuevaCadeteria = new SistemaCadeteria(listas[0], listas[1], listadoDeCadetes);
 
 
+/*Creamos los pedidos*/
+Pedido pedido1 = new Pedido(1, "gorra", Estado.Entregado, "Lola", "Moreno", "155252654", "Casa Azul");
+Pedido pedido2 = new Pedido(2, "zapatos", Estado.Entregado, "Andres", "Varela", "155343504", "Casa Blanca");
+Pedido pedido3 = new Pedido(3, "gaseosa", Estado.Entregado, "Mario", "Capital", "155123456", "Dpto 4a");
+Pedido pedido4 = new Pedido(4, "celular", Estado.EnCamino, "Juliana", "Amalia", "155252654", "Casa Naranja");
+Pedido pedido5 = new Pedido(5, "mc", Estado.EnProceso, "Mariana", "Jujuy 45", "155252654", "Casa");
+Pedido pedido6 = new Pedido(6, "sandwich", Estado.EnCamino, "Daniel", "Bs As 58", "155252654", "Dpto 2a");
+Pedido pedido7 = new Pedido(7, "auricular", Estado.Cancelado, "Marina", "Chile 758", "155252654", "Casa Negra");
+Pedido pedido8 = new Pedido(8, "sillas", Estado.Cancelado, "Julia", "Trancas", "155252654", "Casa Roja");
+
+
+/*Asignamos esos pedidos que creamos a los cadetes que tenemos*/
+listadoDeCadetes[0].AsignarPedido(pedido1);
+listadoDeCadetes[0].AsignarPedido(pedido2);
+listadoDeCadetes[0].AsignarPedido(pedido5);
+listadoDeCadetes[1].AsignarPedido(pedido8);
+listadoDeCadetes[1].AsignarPedido(pedido3);
+listadoDeCadetes[2].AsignarPedido(pedido6);
+listadoDeCadetes[2].AsignarPedido(pedido7);
+listadoDeCadetes[3].AsignarPedido(pedido4);
+
 
 
 Console.WriteLine($"Bienvenido a la cadeteria {nuevaCadeteria.Nombre}");
-int estado;
+int opcion, estado;
 Pedido nuevoPedido = new Pedido();
 do
 {
@@ -48,9 +68,9 @@ do
     Console.WriteLine("1 - Dar de alta pedido");
     Console.WriteLine("2 - Cambiar de estado del pedido");
     Console.WriteLine("3 - Reasignar el pedido a otro cadete");
-    estado = Convert.ToInt16(Console.ReadLine());
+    opcion = Convert.ToInt16(Console.ReadLine());
 
-    switch (estado)
+    switch (opcion)
     {
         case 1:
             Console.WriteLine("Numero del pedido: ");
@@ -106,11 +126,15 @@ do
             }
             break;
         case 3:
-            Console.WriteLine("Reasignado el cadete nuevo");
+            int idCadete;
+            Console.WriteLine("Ingrese el id del cadete que desea reasignar el pedido");
+            idCadete = Int16.Parse(Console.ReadLine());
+            Console.WriteLine(nuevaCadeteria.ReasignarPedido(pedido2, idCadete));
             break;
     }
 
     Console.WriteLine("Desea salir? 1 - SI. 2 - NO");
+    estado = Int16.Parse(Console.ReadLine());
 } while (estado != 1);
 
 Console.ReadKey();
