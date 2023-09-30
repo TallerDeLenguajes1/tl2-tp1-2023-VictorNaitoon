@@ -29,7 +29,7 @@ namespace Cadeteria.Modelos
         public string GetDatosClientes()
         {
             string info = "";
-            info += $"Nombre: {Nombre}, Direccion: {Direccion}, {ReferenciaDireccion}, Telefono: {Telefono}";
+            info += $"Nombre: {Nombre}, Direccion: {Direccion}, {ReferenciaDireccion}, Telefono: {Telefono} \n";
             return info;
         }
 
