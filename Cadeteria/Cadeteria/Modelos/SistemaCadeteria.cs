@@ -8,19 +8,24 @@ namespace Cadeteria.Modelos
 {
     public class SistemaCadeteria
     {
+        private const int VALOR_PEDIDO = 500;
+
         private string? nombre;
         private string? telefono;
         private List<Cadete>? listaCadetes;
+        private List<Pedido>? listaPedidos;
 
         public string? Nombre { get => nombre; set => nombre = value; }
         public string? Telefono { get => telefono; set => telefono = value; }
         public List<Cadete>? ListaCadetes { get => listaCadetes; set => listaCadetes = value; }
+        public List<Pedido>? ListaPedidos { get => listaPedidos; set => listaPedidos = value; }
 
-        public SistemaCadeteria(string nombre, string telefono, List<Cadete> listadoDeCadetes)
+        public SistemaCadeteria(string nombre, string telefono, List<Cadete> listadoDeCadetes, List<Pedido>? listadoDePedidos)
         {
             Nombre = nombre;
             Telefono = telefono;
             ListaCadetes = listadoDeCadetes;
+            ListaPedidos = listadoDePedidos;
         }
         public SistemaCadeteria()
         {
@@ -59,12 +64,11 @@ namespace Cadeteria.Modelos
             {
                info += cadete.GetInformacionCadete();
             }
-            info += "\n";
             return info;
         }
 
-        /* Obtenemos el listado de los cadetes que hay en la cadeteria */
-        public string GetListadoCadetes()
+        /* Mostramos el listado de los cadetes que hay en la cadeteria */
+        public string MostrarListadoCadetes()
         {
             string info = "Listado de cadetes\n";
             foreach (var cadete in ListaCadetes)
@@ -74,6 +78,12 @@ namespace Cadeteria.Modelos
             return info;
         }
 
+        //Obtenemos el listado de los cadetes que tiene la cadeteria
+        public List<Cadete> GetListadoCadetes()
+        {
+            return listaCadetes;
+        }
+
         /* Obtenemos un cadete por id */
         public string GetCadete(int id)
         {
@@ -81,46 +91,46 @@ namespace Cadeteria.Modelos
             return cadete.GetInformacionCadete();
         }
 
-        /*Creamos el pedido y se lo asigamos a un cadete*/
-        public void TomarPedido(int NuemeroPedido, string DetallePedido, Estado Estado, string NombreCliente, string Direccion, string Telefono, string RefetenciaDireccion)
+
+
+        /* Obtenemos la cantidad total de pedidos */
+        public int GetCantidadTotalPedidos()
         {
-            int maximo = 0, idCadete = 0;
-            Pedido pedido = new Pedido(NuemeroPedido, DetallePedido, Estado.EnProceso, NombreCliente, Direccion, Telefono, RefetenciaDireccion);
-            foreach (var persona in ListaCadetes)
-            {
-                if (persona.ListaPedidos.Count > maximo)
-                {
-                    maximo = persona.ListaPedidos.Count;
-                    idCadete = persona.IdCadete;
-                }
-            }
-            var cadete = ListaCadetes.Find(x => x.IdCadete == idCadete);
-            cadete.AsignarPedido(pedido);
+            return ListaPedidos.Count;
         }
 
-        /*Cambiamos de Estado un pedido*/
-        public void CambiaEstado(int idPedido, Estado estado, int idCadete)
+        /* Calculamos el jornal para los cadetes */
+        public double JornalACobrar(int idCadete)
         {
+            return ListaPedidos.Count(x => x.Cadete.IdCadete == idCadete && x.Estado == Estado.Entregado)*VALOR_PEDIDO;
+        }
+
+        /* Creamos el pedido y lo agregamos a la lista*/
+        public void TomarPedido(int numeroPedido, string observacionPedido, Estado estado, string nombreCliente, string direccionCliente, string telefonoCliente, string refetenciaDireccion)
+        {
+            Pedido pedido = new Pedido(numeroPedido, observacionPedido, estado, nombreCliente, direccionCliente, telefonoCliente, refetenciaDireccion);
+            ListaPedidos.Add(pedido);
+        }
+
+        /* Asignamos un cadete para un pedido */
+        public void AsignarCadeteAPedido(int numeroPedido, int idCadete)
+        {
+            var pedido = ListaPedidos.Find(x => x.NumeroPedido == numeroPedido);
             var cadete = ListaCadetes.Find(x => x.IdCadete == idCadete);
-            var pedido = cadete.ListaPedidos.Find(x => x.NumeroPedido == idPedido);
+            pedido.AsignarCadete(cadete);
+        }
+
+
+        
+
+        /*Cambiamos de Estado un pedido*/
+        public void CambiaEstado(int idPedido, Estado estado)
+        {
+            var pedido = ListaPedidos.Find(x => x.NumeroPedido == idPedido);
             pedido.Estado = estado;
         }
 
-        /*Reasignamos un pedido a otro cadete*/
-        public string ReasignarPedido(Pedido pedido, int idCadete)
-        {
-            string info = "";
-            var cadete = ListaCadetes.Find(x => x.IdCadete == idCadete);
-
-            if (cadete == null)
-            {
-                info += "No se encontro ningun cadete correspondiente al id que proporciono\n";
-            }
-
-            cadete.AsignarPedido(pedido);
-            info += "Se reasigno el pedido a otro cliente con exito";
-            return info;
-        }
+        
 
     }
 }

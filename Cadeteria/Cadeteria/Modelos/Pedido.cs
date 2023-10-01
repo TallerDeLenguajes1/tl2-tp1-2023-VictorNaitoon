@@ -36,18 +36,15 @@ namespace Cadeteria.Modelos
             Cliente = new Cliente(nombreCliente, direccion, telefono, direccionReferencia);
         }
 
-        public Pedido(int numeroPedido, string observaciones, Estado estado, string nombreCliente, string direccion, string telefono, string direccionReferencia, Cadete cadete)
-        {
-            NumeroPedido = numeroPedido;
-            Observaciones = observaciones;
-            Estado = estado;
-            Cliente = new Cliente(nombreCliente, direccion, telefono, direccionReferencia);
-            Cadete = cadete;
-        }
-
         public Pedido()
         {
             
+        }
+
+        /*Asignamos un cadete*/
+        public void AsignarCadete(Cadete cadete)
+        {
+            Cadete = cadete;
         }
 
         /*Obtenemos la direccion de un cliente*/
