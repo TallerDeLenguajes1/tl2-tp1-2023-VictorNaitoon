@@ -19,13 +19,12 @@ namespace Cadeteria.Modelos
         public string? Direccion { get => direccion; set => direccion = value; }
         public string? Telefono { get => telefono; set => telefono = value; }
 
-        public Cadete(int idCadete, string nombre, string direccion, string telefono, List<Pedido> listadoDePedidos)
+        public Cadete(int idCadete, string nombre, string direccion, string telefono)
         {
             IdCadete = idCadete;
             Nombre = nombre;
             Direccion = direccion;
             Telefono = telefono;
-            ListaPedidos = listaPedidos;
         }
 
         /*Obtenemos la informacion de un cadete*/

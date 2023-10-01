@@ -46,9 +46,8 @@ namespace Cadeteria.Data
                 while ((linea = sr.ReadLine()) != null)
                 {
                     string[] campos = linea.Split(",");
-                    List<Pedido> listadoPedidos = new List<Pedido>();
 
-                    Cadete cadete = new Cadete(autoincrementar++, campos[0], campos[2], campos[1], listadoPedidos);
+                    Cadete cadete = new Cadete(autoincrementar++, campos[0], campos[2], campos[1]);
 
                     listadoCadetes.Add(cadete);
                 }
@@ -75,8 +74,9 @@ namespace Cadeteria.Data
                 {
                     var campos = linea.Split(",");
                     List<Cadete> listadoCadetes = new List<Cadete>();
+                    List<Pedido> listadoPedidos = new List<Pedido>();
 
-                    SistemaCadeteria cadeteria = new SistemaCadeteria(campos[0], campos[1], listadoCadetes);
+                    SistemaCadeteria cadeteria = new SistemaCadeteria(campos[0], campos[1], listadoCadetes, listadoPedidos);
 
                     listadoCadeterias.Add(cadeteria);
                 }
