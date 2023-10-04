@@ -68,8 +68,6 @@ namespace Cadeteria.Modelos
             string info = "";
             info += $"Numero del pedido: {NumeroPedido}, Detalles del pedido: {Observaciones}, Cliente: ";
             info += Cliente.GetDatosClientes();
-            info += "Informacion del cadete que tiene el pedido: ";
-            info += Cadete.GetInformacionCadete();
             return info;
         }
     }

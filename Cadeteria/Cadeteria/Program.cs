@@ -2,52 +2,41 @@
 using Cadeteria.Modelos;
 
 //Variables
-string rutaCadeteria = @"C:\Users\Victo\Desktop\TallerII-2023\tl2-tp1-2023-VictorNaitoon\Cadeteria\Cadeteria\Data\Cadeteria.csv";
-string rutaCadete = @"C:\Users\Victo\Desktop\TallerII-2023\tl2-tp1-2023-VictorNaitoon\Cadeteria\Cadeteria\Data\Cadete.csv";
-int cadeteriaRandom, autoincrementar = 0;
+string rutaCadeterias = @"C:\Users\Victo\Desktop\TallerII-2023\tl2-tp1-2023-VictorNaitoon\Cadeteria\Cadeteria\Data\Cadeteria.csv";
+string rutaCadetes = @"C:\Users\Victo\Desktop\TallerII-2023\tl2-tp1-2023-VictorNaitoon\Cadeteria\Cadeteria\Data\Cadete.csv";
 Random rand = new Random();
 CargarDatos datos = new CargarDatos();
+int cadeteriaRandom;
 
 
 //Obtenemos los datos de los cadetes que tenemos en el csv
-var listaObtenida = new List<string>();
-listaObtenida = datos.LeerCSV(rutaCadete);
 List<Cadete> listadoDeCadetes = new List<Cadete>();
+listadoDeCadetes = datos.LeerCSVCadetes(rutaCadetes);
 
-/**/
-for(int i = 0; i < listaObtenida.Count; i += 3)
+
+//Creamos los pedidos
+List<Pedido> listadoDePedidos = new List<Pedido>()
 {
-    if(i + 2 < listaObtenida.Count)
-    {
-        Cadete nuevoCadete = new Cadete(autoincrementar++, listaObtenida[i], listaObtenida[i + 2], listaObtenida[i + 1]);
-        listadoDeCadetes.Add(nuevoCadete);
-    } else
-    {
-        Console.WriteLine("No hay suficientes elementos en listaObtenida para crear un Cadete.");
-    }
-}
-
-
+    new Pedido(1, "gorra", Estado.Entregado, "Lola", "Moreno", "155252654", "Casa Azul"),
+    new Pedido(2, "zapatos", Estado.Entregado, "Andres", "Varela", "155343504", "Casa Blanca"),
+    new Pedido(3, "gaseosa", Estado.Entregado, "Mario", "Capital", "155123456", "Dpto 4a"),
+    new Pedido(4, "celular", Estado.EnCamino, "Juliana", "Amalia", "155252654", "Casa Naranja"),
+    new Pedido(5, "mc", Estado.EnProceso, "Mariana", "Jujuy 45", "155252654", "Casa"),
+    new Pedido(6, "sandwich", Estado.EnCamino, "Daniel", "Bs As 58", "155252654", "Dpto 2a"),
+    new Pedido(7, "auricular", Estado.Cancelado, "Marina", "Chile 758", "155252654", "Casa Negra"),
+    new Pedido(8, "sillas", Estado.Cancelado, "Julia", "Trancas", "155252654", "Casa Roja")
+};
 // Obtenemos los datos de la cadeteria
 //Generamos un numero random para obtener los datos de cualquiera de las tres cadeterias que tengo en el csv
-var listas = new List<string>();
-listas = datos.LeerCSV(rutaCadeteria);
-cadeteriaRandom = rand.Next(0, listas.Count);
-SistemaCadeteria nuevaCadeteria = new SistemaCadeteria(listas[0], listas[1], listadoDeCadetes);
+List<SistemaCadeteria> listadoCadeterias = new List<SistemaCadeteria>();
+listadoCadeterias = datos.LeerCSVCadetereias(rutaCadeterias);
+cadeteriaRandom = rand.Next(0, listadoCadeterias.Count);
+SistemaCadeteria nuevaCadeteria = new SistemaCadeteria(listadoCadeterias[cadeteriaRandom].Nombre, listadoCadeterias[cadeteriaRandom].Telefono, listadoDeCadetes, listadoDePedidos);
 
-
-/*Creamos los pedidos*/
-Pedido pedido1 = new Pedido(1, "gorra", Estado.Entregado, "Lola", "Moreno", "155252654", "Casa Azul");
-Pedido pedido2 = new Pedido(2, "zapatos", Estado.Entregado, "Andres", "Varela", "155343504", "Casa Blanca");
-Pedido pedido3 = new Pedido(3, "gaseosa", Estado.Entregado, "Mario", "Capital", "155123456", "Dpto 4a");
-Pedido pedido4 = new Pedido(4, "celular", Estado.EnCamino, "Juliana", "Amalia", "155252654", "Casa Naranja");
-Pedido pedido5 = new Pedido(5, "mc", Estado.EnProceso, "Mariana", "Jujuy 45", "155252654", "Casa");
-Pedido pedido6 = new Pedido(6, "sandwich", Estado.EnCamino, "Daniel", "Bs As 58", "155252654", "Dpto 2a");
-Pedido pedido7 = new Pedido(7, "auricular", Estado.Cancelado, "Marina", "Chile 758", "155252654", "Casa Negra");
-Pedido pedido8 = new Pedido(8, "sillas", Estado.Cancelado, "Julia", "Trancas", "155252654", "Casa Roja");
 
 
 /*Asignamos esos pedidos que creamos a los cadetes que tenemos*/
+/*
 listadoDeCadetes[0].AsignarPedido(pedido1);
 listadoDeCadetes[0].AsignarPedido(pedido2);
 listadoDeCadetes[0].AsignarPedido(pedido5);
@@ -56,9 +45,9 @@ listadoDeCadetes[1].AsignarPedido(pedido3);
 listadoDeCadetes[2].AsignarPedido(pedido6);
 listadoDeCadetes[2].AsignarPedido(pedido7);
 listadoDeCadetes[3].AsignarPedido(pedido4);
+*/
 
-
-
+/*
 Console.WriteLine($"Bienvenido a la cadeteria {nuevaCadeteria.Nombre}");
 int opcion, estado;
 Pedido nuevoPedido = new Pedido();
@@ -136,7 +125,7 @@ do
     Console.WriteLine("Desea salir? 1 - SI. 2 - NO");
     estado = Int16.Parse(Console.ReadLine());
 } while (estado != 1);
-
+*/
 Console.ReadKey();
 
 
