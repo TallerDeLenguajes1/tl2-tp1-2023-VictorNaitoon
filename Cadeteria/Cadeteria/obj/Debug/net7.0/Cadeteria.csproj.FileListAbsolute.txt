@@ -3,7 +3,6 @@ C:\Users\Victo\Desktop\TallerII-2023\tl2-tp1-2023-VictorNaitoon\Cadeteria\Cadete
 C:\Users\Victo\Desktop\TallerII-2023\tl2-tp1-2023-VictorNaitoon\Cadeteria\Cadeteria\bin\Debug\net7.0\Cadeteria.runtimeconfig.json
 C:\Users\Victo\Desktop\TallerII-2023\tl2-tp1-2023-VictorNaitoon\Cadeteria\Cadeteria\bin\Debug\net7.0\Cadeteria.dll
 C:\Users\Victo\Desktop\TallerII-2023\tl2-tp1-2023-VictorNaitoon\Cadeteria\Cadeteria\bin\Debug\net7.0\Cadeteria.pdb
-C:\Users\Victo\Desktop\TallerII-2023\tl2-tp1-2023-VictorNaitoon\Cadeteria\Cadeteria\obj\Debug\net7.0\Cadeteria.csproj.AssemblyReference.cache
 C:\Users\Victo\Desktop\TallerII-2023\tl2-tp1-2023-VictorNaitoon\Cadeteria\Cadeteria\obj\Debug\net7.0\Cadeteria.GeneratedMSBuildEditorConfig.editorconfig
 C:\Users\Victo\Desktop\TallerII-2023\tl2-tp1-2023-VictorNaitoon\Cadeteria\Cadeteria\obj\Debug\net7.0\Cadeteria.AssemblyInfoInputs.cache
 C:\Users\Victo\Desktop\TallerII-2023\tl2-tp1-2023-VictorNaitoon\Cadeteria\Cadeteria\obj\Debug\net7.0\Cadeteria.AssemblyInfo.cs
