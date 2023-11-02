@@ -11,7 +11,7 @@ int cadeteriaRandom;
 
 //Obtenemos los datos de los cadetes que tenemos en el csv
 List<Cadete> listadoDeCadetes = new List<Cadete>();
-listadoDeCadetes = datos.LeerCSVCadetes(rutaCadetes);
+listadoDeCadetes = datos.LeerArchivoCadetes(rutaCadetes);
 
 
 //Creamos los pedidos
@@ -29,7 +29,7 @@ List<Pedido> listadoDePedidos = new List<Pedido>()
 // Obtenemos los datos de la cadeteria
 //Generamos un numero random para obtener los datos de cualquiera de las tres cadeterias que tengo en el csv
 List<SistemaCadeteria> listadoCadeterias = new List<SistemaCadeteria>();
-listadoCadeterias = datos.LeerCSVCadetereias(rutaCadeterias);
+listadoCadeterias = datos.LeerArchivoCadeterias(rutaCadeterias);
 cadeteriaRandom = rand.Next(0, listadoCadeterias.Count);
 SistemaCadeteria nuevaCadeteria = new SistemaCadeteria(listadoCadeterias[cadeteriaRandom].Nombre, listadoCadeterias[cadeteriaRandom].Telefono, listadoDeCadetes, listadoDePedidos);
 

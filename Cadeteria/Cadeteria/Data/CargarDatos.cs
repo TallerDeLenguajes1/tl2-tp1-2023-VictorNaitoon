@@ -7,34 +7,9 @@ using System.Threading.Tasks;
 
 namespace Cadeteria.Data
 {
-    public class CargarDatos
+    public class CargarDatos : AccesoADatos
     {
-        public List<string> LeerCSV(string ruta)
-        {
-            List<string> lista = new List<string>();
-            try
-            {
-                var archivo = new FileStream(ruta, FileMode.Open);
-                var sr = new StreamReader(archivo);
-                var linea = "";
-                while ((linea = sr.ReadLine()) != null)
-                {
-                    string[] campos = linea.Split(",");
-                    foreach (var campo in campos)
-                    {
-                        lista.Add(campo);
-                    }
-                }
-                sr.Close();
-            } catch (Exception ex)
-            {
-                throw new Exception(ex.Message);
-            }
-
-            return lista;
-        }
-
-        public List<Cadete> LeerCSVCadetes(string ruta)
+        public override List<Cadete> LeerArchivoCadetes(string ruta)
         {
             int autoincrementar = 0;
             List<Cadete> listadoCadetes = new List<Cadete>();
@@ -62,7 +37,7 @@ namespace Cadeteria.Data
             return listadoCadetes;
         }
 
-        public List<SistemaCadeteria> LeerCSVCadetereias(string ruta)
+        public override List<SistemaCadeteria> LeerArchivoCadeterias(string ruta)
         {
             List<SistemaCadeteria> listadoCadeterias = new List<SistemaCadeteria>();
             try
